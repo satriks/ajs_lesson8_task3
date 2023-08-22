@@ -1,10 +1,10 @@
-import Satting from "../main"
+import Satting from '../main';
 
 test('test', () => {
-  const satt = new Satting
-  satt.changeSetting(['difficulty', 'hard'])
-  expect(satt).toBeDefined()
-})
+  const satt = new Satting();
+  satt.changeSetting(['difficulty', 'hard']);
+  expect(satt).toBeDefined();
+});
 
 test.each(
   [
@@ -20,37 +20,32 @@ test.each(
     ['difficulty normal', 'difficulty', 'normal', 'normal'],
     ['difficulty hard', 'difficulty', 'hard', 'hard'],
     ['difficulty nightmare', 'difficulty', 'nightmare', 'nightmare'],
-]
+  ],
 )(('Описание^ %s'), (name, param, data, expected) => {
-  const satt = new Satting
-  try{
-    satt.changeSetting([param, data])
-    expect(satt.setting.get(param)).toBe(expected)
+  const satt = new Satting();
+  try {
+    satt.changeSetting([param, data]);
+    expect(satt.userSetting.get(param)).toBe(expected);
+  } catch (err) {
+    expect.toThrow(Error);
   }
-  catch (err) {
-    expect.toThrow(Error)
-  }
-})
+});
 
 test('test error', () => {
-  const satt = new Satting
-  expect(() => satt.changeSetting(['music', 'hard'])).toThrow(Error)
-  
-})
+  const satt = new Satting();
+  expect(() => satt.changeSetting(['music', 'hard'])).toThrow(Error);
+});
 test('test error theme', () => {
-  const satt = new Satting
-  expect(() => satt.changeSetting(['theme', 'hard'])).toThrow(Error)
-  
-})
+  const satt = new Satting();
+  expect(() => satt.changeSetting(['theme', 'hard'])).toThrow(Error);
+});
 test('test error difficulty', () => {
-  const satt = new Satting
-  expect(() => satt.changeSetting(['difficulty', 'off'])).toThrow(Error)
-  
-})
+  const satt = new Satting();
+  expect(() => satt.changeSetting(['difficulty', 'off'])).toThrow(Error);
+});
 test('test getter', () => {
-  const satt = new Satting
-  console.log(satt.getSettings);
-  expect(satt.getSettings).toBeTruthy()
-  expect(satt.getSettings).toBeInstanceOf(Map)
-  
-})
+  const satt = new Satting();
+  satt.changeSetting(['difficulty', 'hard']);
+  expect(satt.getSettings).toBeTruthy();
+  expect(satt.getSettings).toBeInstanceOf(Map);
+});
